@@ -1,4 +1,4 @@
-package christmas.database;
+package christmas.event;
 
 public enum StarMarker {
     DECEMBER_3,

@@ -1,6 +1,6 @@
 package christmas.event.sale;
 
-import christmas.database.StarMarker;
+import christmas.event.StarMarker;
 import christmas.domain.Bill;
 
 public class StarSaleEvent implements SaleEventCommon {
