@@ -86,19 +86,26 @@ public class InputView {
 
                             String menuName = menuAndQuantity.get(0).trim();
 
-                            for (Menu menu : Menu.values()) {
-                                if (menu.getName().equals(menuName)) {
-                                    String quantity = menuAndQuantity.get(1).trim();
-                                    validateQuantity(quantity);
-
-                                    menus.put(menu, Integer.parseInt(quantity));
-                                    break;
-                                }
-                            }
-
-
+                    if (!checkMenuNameIsValid(menus, menuName, menuAndQuantity))
+                                throw new IllegalArgumentException(ErrorMessage.INVALID_MENU_AND_QUANTITY_EXCEPTION.getMessage());
                         }
                 );
+    }
+
+    private boolean checkMenuNameIsValid(Map<Menu, Integer> menus, String menuName, List<String> menuAndQuantity) throws IllegalArgumentException {
+        for (Menu menu : Menu.values()) {
+            if (menu.getName().equals(menuName)) {
+                if (menus.containsKey(menu))
+                    throw new IllegalArgumentException(ErrorMessage.INVALID_MENU_AND_QUANTITY_EXCEPTION.getMessage());
+
+                String quantity = menuAndQuantity.get(1).trim();
+                validateQuantity(quantity);
+
+                menus.put(menu, Integer.parseInt(quantity));
+                return true;
+            }
+        }
+        return false;
     }
 
     private void validateInputDay(String input) throws IllegalArgumentException {

@@ -22,11 +22,10 @@ public class BillService {
 
     public void saveOrders(Map<Menu, Integer> orders) {
         bill.setOrders(orders);
-
-        bill.fillOutBill();
     }
 
     public void readBill(Map<String, Object> model) {
+        bill.fillOutBill();
         model.put("message", bill.toString());
     }
 }
